@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <h1 class="text-black dark:text-white ">IVOTE</h1>
                     </a>
                     <div class="ml-2">
