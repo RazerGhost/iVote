@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -12,6 +11,39 @@ use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
+    // ...
+
+    public function create()
+    {
+        // Add logic to display the user addition form
+        return view('admin.add');
+    }
+
+    public function store(Request $request)
+    {
+        // Add logic to validate and store the new user
+        // You can access form data using $request->input('fieldname')
+
+        // Example validation
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+            // Add more fields as needed
+        ]);
+
+        // Example user creation
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            // Add more fields as needed
+        ]);
+
+        // Redirect to the admin home page after user creation
+        return redirect()->route('home')->with('status', 'User added successfully');
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -30,8 +62,7 @@ class ProfileController extends Controller
         $user->update($request->all());
 
         // Check if the user is an admin
-       
-        if ($request->user()->is_admin) {
+         if ($request->user()->is_admin) {
             return redirect()->route('home')->with('status', 'User updated successfully');
         }
 
@@ -41,21 +72,15 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+    public function destroy(User $user)
+{
+    // You might want to add additional authorization logic here to ensure
+    // that the authenticated user has the right to delete the specified user.
 
-        $user = $request->user();
+    $user->delete();
 
-        Auth::logout();
+    // Optionally, you can add a redirect here after successful deletion.
+    return redirect()->route('home')->with('status', 'User deleted successfully');
+}
 
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
-    }
 }

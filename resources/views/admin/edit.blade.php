@@ -24,14 +24,14 @@
 
             <!-- You can add more fields here based on your User model -->
 
-            <div class="flex items-center justify-end mt-4">
-                 <button  class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-800">   
-                <a href="{{ route('home') }}">Back
-                </button>
-                <button type="submit" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-800">
-                    Save Changes
-                </button>
-            </div>
+           <div class="flex items-center justify-end mt-4">
+    <a href="{{ route('home') }}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-800">
+        Back
+    </a>
+    <button type="submit" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring focus:border-indigo-700 active:bg-indigo-800">
+        Save Changes
+    </button>
+</div>
         </form>
     </div>
 </x-app-layout>
